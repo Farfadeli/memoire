@@ -9,6 +9,7 @@ def create_result_dir() -> None :
         os.mkdir("./results")
     
 def get_args() -> argparse.Namespace:
+    """Argument a passer en ligne de commande pour modifier la simulation"""
     parser = argparse.ArgumentParser()
     
     parser.add_argument("--file", type=str , help="File name to store data of world")

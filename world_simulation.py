@@ -4,7 +4,7 @@ from geographics.countries import Countries
 
 
 class World():
-
+#Initialisation
     def __init__(self, human_nb_at_start: int, nb_countries: int, gap: int, limit: int):
         # Variable initiale de la simulation
         self.calendar = Calendar()
@@ -23,6 +23,9 @@ class World():
 
         self.main_loop()
 
+#-----------------------------------------------------------------------------------------------------------------------------------------
+#Simulation loop
+
     def main_loop(self) -> None:
         """Boucle principale de la simulation"""
         year_number = self.limit*365
@@ -30,7 +33,7 @@ class World():
             self.logical_loop()
             self.couple_loop()
             self.died_loop()
-            print(self.calendar.get_date())
+
             year_number -= self.gap
 
     def logical_loop(self) -> None:
@@ -47,6 +50,9 @@ class World():
     def died_loop(self) -> None:
         """Boucle principale pour la gestion de la mort des humains"""
         pass
+
+#-----------------------------------------------------------------------------------------------------------------------------------------
+#Getter
 
     def get_calendar(self) -> Calendar: return self.calendar
     def get_human_number(self) -> int: return self.human_number
