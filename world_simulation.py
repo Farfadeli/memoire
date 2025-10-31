@@ -13,14 +13,16 @@ class World():
         self.gap = gap
         self.limit = limit
 
-        self.human_list = []
         self.countries = Countries(self.countries_number)
+        self.human_by_country = {}
+        for country in self.countries.get_country(): 
+            self.human_by_country[country.get_country_name()] = []
 
         # Création des huamains de base dans la simulation
         for _ in range(self.human_number):
-            self.human_list.append(
-                Human(self.countries.get_random_countries(), self.calendar.get_date()))
-
+            new_human = Human(self.countries.get_random_countries(), self.calendar.get_date())
+            self.human_by_country[new_human.get_born_country().get_country_name()].append(new_human)
+    
         self.main_loop()
 
 #-----------------------------------------------------------------------------------------------------------------------------------------
@@ -42,10 +44,7 @@ class World():
 
     def couple_loop(self) -> None:
         """Boucle principale pour la formation de couple entre 2 huamains"""
-        for human in self.human_list:
-            if self.calendar.get_year() - human.get_birth_year() >= 18:
-                print(
-                     f"name : {human.get_name()} can be in couple beaause {'he' if human.get_sexuality() == 'M' else 'she'} is {self.calendar.get_year() - human.get_birth_year()} years old")
+        pass
 
     def died_loop(self) -> None:
         """Boucle principale pour la gestion de la mort des humains"""
@@ -56,5 +55,5 @@ class World():
 
     def get_calendar(self) -> Calendar: return self.calendar
     def get_human_number(self) -> int: return self.human_number
-    def get_human_list(self) -> list[Human]: return self.human_list
+    def get_human_list(self) -> dict[str : list[Human]]: return self.human_by_country
     def get_countries_list(self) -> list[Countries]: return self.countries
